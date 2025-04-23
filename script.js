@@ -2,91 +2,119 @@ console.log("Script.js berhasil dimuat");
 
 const questions = [
   {
-    question: "Apa arti dari 'Al-Qur'an'?",
-    options: ["Kitab Puisi", "Bacaan", "Kumpulan Cerita", "Doa Harian"],
-    answer: "Bacaan"
+    question: "Apa kitab suci agama Islam?",
+    options: ["Injil", "Taurat", "Al-Qur'an", "Zabur"],
+    answer: "Al-Qur'an"
   },
   {
-    question: "Berapa jumlah rakaat shalat Subuh?",
-    options: ["1 rakaat", "2 rakaat", "3 rakaat", "4 rakaat"],
-    answer: "2 rakaat"
+    question: "Siapa nabi terakhir dalam Islam?",
+    options: ["Nabi Musa", "Nabi Isa", "Nabi Ibrahim", "Nabi Muhammad"],
+    answer: "Nabi Muhammad"
   },
   {
-    question: "Siapakah nabi pertama dalam Islam?",
-    options: ["Nabi Muhammad", "Nabi Isa", "Nabi Musa", "Nabi Adam"],
-    answer: "Nabi Adam"
+    question: "Berapa jumlah rakaat sholat Maghrib?",
+    options: ["2", "3", "4", "5"],
+    answer: "3"
   },
   {
-    question: "Zakat termasuk dalam rukun Islam ke berapa?",
-    options: ["Ke-2", "Ke-3", "Ke-4", "Ke-5"],
-    answer: "Ke-3"
+    question: "Hari raya umat Islam adalah?",
+    options: ["Natal", "Waisak", "Idul Fitri", "Imlek"],
+    answer: "Idul Fitri"
   },
   {
-    question: "Apa nama kitab suci yang diturunkan kepada Nabi Isa?",
-    options: ["Zabur", "Taurat", "Injil", "Al-Qur'an"],
-    answer: "Injil"
+    question: "Rukun Islam yang pertama adalah?",
+    options: ["Zakat", "Sholat", "Puasa", "Syahadat"],
+    answer: "Syahadat"
   },
   {
-    question: "Apa arti dari Asmaul Husna 'Ar-Rahman'?",
-    options: ["Maha Mengetahui", "Maha Pengasih", "Maha Perkasa", "Maha Pengampun"],
-    answer: "Maha Pengasih"
+    question: "Bulan suci umat Islam?",
+    options: ["Januari", "Ramadhan", "Syawal", "Dzulhijjah"],
+    answer: "Ramadhan"
   },
   {
-    question: "Apa arti dari 'puasa' dalam bahasa Arab?",
-    options: ["Sujud", "Zakat", "Shalat", "Shaum"],
-    answer: "Shaum"
+    question: "Ka’bah berada di kota?",
+    options: ["Madinah", "Yerusalem", "Mekkah", "Kairo"],
+    answer: "Mekkah"
   },
   {
-    question: "Kapan diwajibkannya puasa Ramadhan?",
-    options: ["1 Muharram", "12 Rabiul Awal", "1 Ramadhan", "10 Dzulhijjah"],
-    answer: "1 Ramadhan"
+    question: "Jumlah rakaat sholat Subuh?",
+    options: ["2", "3", "4", "5"],
+    answer: "2"
   },
   {
-    question: "Siapakah Khalifah pertama setelah wafatnya Nabi Muhammad SAW?",
-    options: ["Umar bin Khattab", "Ali bin Abi Thalib", "Utsman bin Affan", "Abu Bakar Ash-Shiddiq"],
-    answer: "Abu Bakar Ash-Shiddiq"
-  },
-  {
-    question: "Apa hukum shalat lima waktu bagi umat Islam?",
+    question: "Puasa Ramadhan hukumnya?",
     options: ["Sunnah", "Wajib", "Mubah", "Makruh"],
     answer: "Wajib"
+  },
+  {
+    question: "Salah satu nama malaikat yang mencatat amal?",
+    options: ["Israfil", "Ridwan", "Raqib", "Malik"],
+    answer: "Raqib"
   }
 ];
 
 let currentQuestionIndex = 0;
+let score = 0;
+let answered = false;
 
 function showQuestion() {
   const questionElement = document.getElementById("question");
   const optionsElement = document.getElementById("options");
+  const feedbackElement = document.getElementById("feedback");
+  const scoreContainer = document.getElementById("score-container");
+
+  feedbackElement.textContent = "";
+  scoreContainer.style.display = "none";
+  answered = false;
 
   const currentQuestion = questions[currentQuestionIndex];
   questionElement.textContent = currentQuestion.question;
 
-  optionsElement.innerHTML = ""; // reset opsi sebelumnya
+  optionsElement.innerHTML = "";
   currentQuestion.options.forEach(option => {
     const button = document.createElement("button");
     button.textContent = option;
-    button.onclick = () => checkAnswer(option);
+    button.onclick = () => {
+      if (!answered) {
+        checkAnswer(option);
+        answered = true;
+      }
+    };
     optionsElement.appendChild(button);
   });
 }
 
 function checkAnswer(selectedOption) {
   const currentQuestion = questions[currentQuestionIndex];
+  const feedbackElement = document.getElementById("feedback");
+
   if (selectedOption === currentQuestion.answer) {
-    alert("Benar!");
+    score++;
+    feedbackElement.textContent = "Benar!";
+    feedbackElement.style.color = "green";
   } else {
-    alert("Salah!");
+    feedbackElement.textContent = "Salah!";
+    feedbackElement.style.color = "red";
   }
 }
 
 function nextQuestion() {
   currentQuestionIndex++;
+  const scoreContainer = document.getElementById("score-container");
+
   if (currentQuestionIndex < questions.length) {
     showQuestion();
   } else {
-    alert("Quiz selesai!");
+    document.getElementById("question").textContent = "";
+    document.getElementById("options").innerHTML = "";
+    document.getElementById("feedback").textContent = "";
+    scoreContainer.innerHTML = `<h3>Quiz Selesai!</h3><p>Skor kamu: ${score} dari ${questions.length}</p>`;
+    scoreContainer.style.display = "block";
   }
 }
 
-window.onload = showQuestion;
+window.onload = function () {
+  score = 0;
+  currentQuestionIndex = 0;
+  showQuestion();
+};
