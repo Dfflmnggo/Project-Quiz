@@ -2,6 +2,7 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Quiz Sederhana</title>
   <link rel="stylesheet" href="style.css">
 </head>
@@ -9,9 +10,9 @@
   <div class="quiz-container">
     <h2 id="question">Pertanyaan di sini</h2>
     <div id="options"></div>
-    <div id="feedback"></div> <!-- Feedback benar/salah -->
-    <button onclick="nextQuestion()">Next</button>
-    <div id="score-container" style="display: none;"></div> <!-- Skor akhir -->
+    <div id="feedback"></div>
+    <button class="next-btn" onclick="nextQuestion()">Next</button>
+    <div id="score-container" style="display: none;"></div>
   </div>
   <script src="script.js"></script>
 </body>

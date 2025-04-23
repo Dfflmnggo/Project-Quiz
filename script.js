@@ -91,10 +91,10 @@ function checkAnswer(selectedOption) {
   if (selectedOption === currentQuestion.answer) {
     score++;
     feedbackElement.textContent = "Benar!";
-    feedbackElement.style.color = "green";
+    feedbackElement.style.color = "#28a745";
   } else {
     feedbackElement.textContent = "Salah!";
-    feedbackElement.style.color = "red";
+    feedbackElement.style.color = "#dc3545";
   }
 }
 
