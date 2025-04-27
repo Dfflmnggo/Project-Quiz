@@ -7,10 +7,14 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Audio Background -->
-  <audio id="music-audio" src="audio/music.ogg" loop autoplay></audio>
+  <!-- Opening Screen -->
+  <div id="opening-screen">
+    <h1>Selamat Datang di Quiz Islam!</h1>
+    <button class="play-btn" onclick="startQuiz()"></button>
+  </div>
 
-  <div class="quiz-container">
+  <!-- Quiz Container -->
+  <div class="quiz-container" id="quiz-container" style="display: none;">
     <div id="lives"></div>
     <div id="level"></div>
     <div id="timer"></div>
@@ -20,8 +24,14 @@
 
     <button class="next-btn" id="next-btn" onclick="nextQuestion()" style="display: none;">Next</button>
     <div id="score-container" style="display: none;"></div>
-    <button class="retry-btn" onclick="retryQuiz()" style="display: none;">Retry</button>
+    <button class="retry-btn" id="retry-btn" onclick="retryQuiz()" style="display: none;">Retry</button>
   </div>
+
+  <!-- Audios -->
+  <audio id="music-audio" src="audio/music.ogg" loop></audio>
+  <audio id="correct-sound" src="audio/correct.ogg"></audio>
+  <audio id="incorrect-sound" src="audio/incorrect.ogg"></audio>
+  <audio id="touch-sound" src="audio/touch.ogg"></audio>
 
   <script src="script.js"></script>
 </body>
